@@ -1,0 +1,59 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../iron-media-query/iron-media-query.html">
+
+<dom-module id="breakpoint-system">
+  <template>
+    <iron-media-query query="(min-width: 0) and (max-width: 599px)" query-matches="{{xsmall}}"></iron-media-query>
+    <iron-media-query query="(min-width: 600px) and (max-width: 1023px)" query-matches="{{small}}"></iron-media-query>
+    <iron-media-query query="(min-width: 1024px) and (max-width: 1439px)" query-matches="{{medium}}"></iron-media-query>
+    <iron-media-query query="(min-width: 1440px) and (max-width: 1919px)" query-matches="{{large}}"></iron-media-query>
+    <iron-media-query query="(min-width: 1920px)" query-matches="{{xlarge}}"></iron-media-query>
+  </template>
+  <script>
+    class BreakpointSystem extends Polymer.Element {
+      static get is() { return 'breakpoint-system'; }
+      static get properties() {
+        return {
+          window: { type: String, reflectToAttribute: true, notify: true },
+
+          xsmall: { type: Boolean, observer: '_xsmallChanged' },
+          small: { type: Boolean, observer: '_smallChanged' },
+          medium: { type: Boolean, observer: '_mediumChanged' },
+          large: { type: Boolean, observer: '_largeChanged' },
+          xlarge: { type: Boolean, observer: '_xlargeChanged' }
+        }
+      }
+
+      _xlargeChanged(value) {
+        if (value) {
+          this.window = 'xlarge';
+        }
+      }
+
+      _largeChanged(value) {
+        if (value) {
+          this.window = 'large';
+        }
+      }
+
+      _mediumChanged(value) {
+        if (value) {
+          this.window = 'medium';
+        }
+      }
+
+      _smallChanged(value) {
+        if (value) {
+          this.window = 'small';
+        }
+      }
+
+      _xsmallChanged(value) {
+        if (value) {
+          this.window = 'xsmall';
+        }
+      }
+    }
+    window.customElements.define(BreakpointSystem.is, BreakpointSystem);
+  </script>
+</dom-module>
